@@ -9,7 +9,6 @@
 namespace wpWax\OneListing;
 
 use Directorist\Directorist_Listings;
-use Directorist\Directorist_Listing_Form;
 use Directorist\Directorist_Listing_Taxonomy;
 use Directorist\Directorist_Single_Listing;
 use Directorist\Helper;
@@ -53,7 +52,6 @@ class Directorist_Support {
 
 		// Adds and Modified Add Listing Form
 		add_filter( 'atbdp_submission_form_settings', array( $this, 'atbdp_submission_form_settings' ) );
-		add_action( 'directorist_before_add_listing_from_frontend', array( $this, 'directorist_before_add_listing_from_frontend' ) );
 		// add_filter( 'directorist_field_template', array( $this, 'directorist_field_template' ) );
 		add_filter( 'atbdp_form_custom_widgets', array( $this, 'atbdp_form_custom_widgets' ) );
 
@@ -339,20 +337,6 @@ class Directorist_Support {
 
 	// 	return $template;
 	// }
-
-	public function directorist_before_add_listing_from_frontend() {
-
-		$form_data = Directorist_Listing_Form::instance();
-		$builder = $form_data->build_form_data( $form_data->current_listing_type  );
-
-		foreach ( $builder as $section ) { 
-			foreach ( $section['fields'] as $key => $field ) {
-				if ( ($key === 'listing_type') || ($key === 'listing-type')  ) {
-					$form_data->field_template( $field );
-				}
-			}
-		}
-	}
 
 	public function atbdp_form_custom_widgets( $fields ) {
 		$custom_field_meta_key_field = apply_filters( 'directorist_custom_field_meta_key_field_args', array(

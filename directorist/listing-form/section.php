@@ -18,11 +18,8 @@ $id    = str_replace(' ', '-', strtolower( $label ) );
 	<section class="directorist-content-module__contents">
 
 		<?php 
-			foreach ( $section_data['fields'] as $key => $field ) {
-				// Listing type field should be excluded from the listing form
-				if ( ($key !== 'listing_type') && ($key !== 'listing-type')  ) {
-					$listing_form->field_template( $field );
-				}
+			foreach ( $section_data['fields'] as $field ) {
+				$listing_form->field_template( $field );
 			}
 		?>
 
